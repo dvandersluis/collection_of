@@ -51,6 +51,16 @@ class Collection
     @collection << obj
   end
 
+  def keys
+    @collection.map{ |i| i.name.to_sym }
+  end
+
+  def include?(item)
+    return true if @collection.include?(item)
+    return keys.include?(item.to_sym) if item.respond_to?(:to_sym)
+    return false
+  end
+
   def except(*items)
     items.map!(&:to_sym)
     self.class.new(klass, reject{ |i| items.include?(i.name.to_sym) })

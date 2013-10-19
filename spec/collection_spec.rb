@@ -143,6 +143,28 @@ describe Collection do
     end
   end
 
+  describe "#keys" do
+    let(:w1) { Widget.new(:one) }
+    let(:w2) { Widget.new(:two) }
+    subject { described_class[Widget] }
+
+    before { subject << w1 << w2 }
+
+    its(:keys) { should == [:one, :two] }
+  end
+
+  describe "#include?" do
+    let(:w1) { Widget.new(:one) }
+    let(:w2) { Widget.new(:one) }
+    subject { described_class[Widget] }
+    before { subject << w1 }
+
+    it { should include w1 }
+    it { should include :one }
+    it { should_not include w2 }
+    it { should_not include :two }
+  end
+
   describe "#except" do
     let(:c) { described_class[Widget] }
     let(:w1) { Widget.new(:one) }
