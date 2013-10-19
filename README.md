@@ -1,15 +1,23 @@
 # CollectionOf
 
-TODO: Write a gem description
+Provides an Enumerable which acts as a collection of a certain type of object (and its subclasses,
+unless `allow_subclasses` is set to `false` on initialization).
 
 ## Usage
 
-    WidgetCollection = CollectionOf[Widget]
-    WidgetCollection = Collection.of(Widget)
+    WidgetCollection = Collection[Widget]
+    # OR WidgetCollection = Collection.of(Widget)
+    # OR WidgetCollection = Collection.new(Widget)
 
     wc = WidgetCollection.new
     wc << Widget.new # all good!
     wc << Wadget.new # => ArgumentError, "can only add Widget objects"
+
+When a `Collection` is cloned, any items contained within the collection are cloned as well.
+
+    wc << Widget.new(:one)
+    wc << Widget.new(:two)
+    wc[:one] == wc.clone[:one] # => false
 
 ## Installation
 

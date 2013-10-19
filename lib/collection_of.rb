@@ -1,5 +1,8 @@
-require "collection_of/version"
+require 'collection_of/collection'
+require 'collection_of/version'
 
 module CollectionOf
-  # Your code goes here...
+  def self.[](klass, *args)
+    Collection.of(klass, *args)
+  end
 end
