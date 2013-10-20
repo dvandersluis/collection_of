@@ -153,6 +153,16 @@ describe Collection do
     its(:keys) { should == [:one, :two] }
   end
 
+  describe "#key?" do
+    let(:w1) { Widget.new(:one) }
+    subject { described_class[Widget] }
+
+    before { subject << w1 }
+
+    it { should have_key(:one) }
+    it { should_not have_key(:two) }
+  end
+
   describe "#include?" do
     let(:w1) { Widget.new(:one) }
     let(:w2) { Widget.new(:one) }

@@ -55,6 +55,11 @@ class Collection
     @collection.map{ |i| i.name.to_sym }
   end
 
+  def key?(key)
+    keys.include?(key.to_sym)
+  end
+  alias_method :has_key?, :key?
+
   def include?(item)
     return true if @collection.include?(item)
     return keys.include?(item.to_sym) if item.respond_to?(:to_sym)
