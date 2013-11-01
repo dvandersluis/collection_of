@@ -201,6 +201,32 @@ describe Collection do
     end
   end
 
+  describe "#slice" do
+    let(:c) { described_class[Widget] }
+    let(:w1) { Widget.new(:one) }
+    let(:w2) { Widget.new(:two) }
+
+    before { c << w1 << w2 }
+
+    context "when an include item is specified" do
+      subject { c.slice(:one) }
+      it { should be_a described_class }
+      it { should == [w1] }
+    end
+
+    context "when all included items are specified" do
+      subject { c.slice(:one, :two) }
+      it { should be_a described_class }
+      it { should == [w1, w2] }
+    end
+
+    context "when no included items are specified" do
+      subject { c.slice(:three) }
+      it { should be_a described_class }
+      it { should be_empty }
+    end
+  end
+
   describe "#==" do
     let(:w1) { Widget.new(:one) }
     let(:w2) { Widget.new(:two) }
