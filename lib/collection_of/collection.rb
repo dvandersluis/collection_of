@@ -76,6 +76,10 @@ class Collection
     self.class.new(klass, select{ |i| items.include?(i.name.to_sym) })
   end
 
+  def delete(*items)
+    @collection = reject{ |i| items.include?(i.name) }
+  end
+
   def ==(other)
     return other == @collection if other.is_a?(self.class)
     return @collection == other if other.is_a?(Array)

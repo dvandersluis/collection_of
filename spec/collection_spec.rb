@@ -244,4 +244,29 @@ describe Collection do
     it { should_not == described_class[Widget, [w2]] }
     it { should_not == described_class[Widget] }
   end
+
+  describe "#delete" do
+    let(:c) { described_class[Widget] }
+    let(:w1) { Widget.new(:one) }
+    let(:w2) { Widget.new(:two) }
+
+    subject { c }
+
+    before { c << w1 << w2 }
+
+    context "when an included item is specified" do
+      before { c.delete(:one) }
+      it { should == [w2] }
+    end
+
+    context "when all included items are specified" do
+      before { c.delete(:one, :two) }
+      it { should be_empty }
+    end
+
+    context "when no included items are specified" do
+      before { c.delete(:three) }
+      it { should == [w1, w2] }
+    end
+  end
 end
