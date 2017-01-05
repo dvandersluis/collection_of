@@ -33,7 +33,7 @@ class Collection
   def [](item)
     return nil if empty?
 
-    if item.is_a?(Fixnum)
+    if item.is_a?(0.class)
       @collection[item]
     else
       item = item.to_sym
