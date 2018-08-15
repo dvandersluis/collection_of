@@ -31,8 +31,6 @@ class Collection
   end
 
   def [](item)
-    return nil if empty?
-
     if item.is_a?(0.class)
       @collection[item]
     else

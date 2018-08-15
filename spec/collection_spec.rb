@@ -1,3 +1,4 @@
+require 'rspec/its'
 require 'collection_of'
 
 class Widget
