@@ -1,0 +1,16 @@
+Metrics/LineLength:
+  Max: 150
+
+Metrics/BlockLength:
+  Exclude:
+    - spec/**/*.rb
+
+Style/Alias:
+  EnforcedStyle: prefer_alias_method
+
+Style/Documentation:
+  Enabled: false
+
+Style/HashSyntax:
+  Exclude:
+  - 'Rakefile'

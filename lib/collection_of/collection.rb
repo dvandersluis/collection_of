@@ -24,9 +24,8 @@ class Collection
     super
 
     # Clone each item in the collection
-    @collection = @collection.inject([]) do |ary, item|
+    @collection = @collection.each_with_object([]) do |item, ary|
       ary << (item.duplicable? ? item.clone : item)
-      ary
     end
   end
 
@@ -35,7 +34,7 @@ class Collection
       @collection[item]
     else
       item = item.to_sym
-      detect{ |i| i.name.to_sym == item }
+      detect { |i| i.name.to_sym == item }
     end
   end
 
@@ -50,7 +49,7 @@ class Collection
   end
 
   def keys
-    @collection.map{ |i| i.name.to_sym }
+    @collection.map { |i| i.name.to_sym }
   end
 
   def key?(key)
@@ -61,21 +60,21 @@ class Collection
   def include?(item)
     return true if @collection.include?(item)
     return keys.include?(item.to_sym) if item.respond_to?(:to_sym)
-    return false
+    false
   end
 
   def except(*items)
     items.map!(&:to_sym)
-    self.class.new(klass, reject{ |i| items.include?(i.name.to_sym) })
+    self.class.new(klass, reject { |i| items.include?(i.name.to_sym) })
   end
 
   def slice(*items)
     items.map!(&:to_sym)
-    self.class.new(klass, select{ |i| items.include?(i.name.to_sym) })
+    self.class.new(klass, select { |i| items.include?(i.name.to_sym) })
   end
 
   def delete(*items)
-    @collection = reject{ |i| items.include?(i.name) }
+    @collection = reject { |i| items.include?(i.name) }
   end
 
   def ==(other)
